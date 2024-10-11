@@ -1,3 +1,3 @@
 # Modelagem do banco de dados
 
-![modelagem](https://github.com/user-attachments/assets/25ac7bbd-7f7b-42f2-80bf-9108a1376935)
+![image](https://github.com/user-attachments/assets/cd573ba5-6fd8-4ad6-a2af-883f9b5386e4)
