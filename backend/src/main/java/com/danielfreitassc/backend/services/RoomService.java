@@ -35,13 +35,13 @@ public class RoomService {
 
     public RoomResponseDto getById(UUID id) {
         Optional<RoomEntity> room = roomRepository.findById(id);
-        if(room.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Nenhuma com este id");
+        if(room.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Nenhuma sala com este id");
         return  roomMapper.toDto(room.get());
     }
 
     public RoomResponseDto update(UUID id, RoomRequestDto roomRequestDto) {
         Optional<RoomEntity> room = roomRepository.findById(id);
-        if(room.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Nenhuma com este id");
+        if(room.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Nenhuma sala com este id");
         RoomEntity roomEntity = roomMapper.toEntity(roomRequestDto);
         roomEntity.setId(id);
         return roomMapper.toDto(roomRepository.save(roomEntity));
@@ -49,7 +49,7 @@ public class RoomService {
 
     public RoomResponseDto delete(UUID id) {
         Optional<RoomEntity> room = roomRepository.findById(id);
-        if(room.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Nenhuma com este id");
+        if(room.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Nenhuma sala com este id");
         roomRepository.delete(room.get());
         return roomMapper.toDto(room.get());
     }
