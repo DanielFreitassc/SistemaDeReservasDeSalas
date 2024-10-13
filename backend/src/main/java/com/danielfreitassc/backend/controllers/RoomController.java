@@ -33,7 +33,7 @@ public class RoomController {
     }
 
     @GetMapping
-    public Page<RoomResponseDto> getAll(Pageable pageable,@RequestParam(name="search", required=false) String search) {
+    public Page<RoomResponseDto> getAll(Pageable pageable,@RequestParam(name="search", required=false, defaultValue="") String search) {
         return  roomService.getAll(pageable,search);
     }
 
