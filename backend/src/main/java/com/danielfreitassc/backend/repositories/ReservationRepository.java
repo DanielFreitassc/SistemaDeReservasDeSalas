@@ -12,6 +12,6 @@ import com.danielfreitassc.backend.models.ReservationEntity;
 public interface ReservationRepository extends JpaRepository<ReservationEntity, UUID>{
 
     @Query("SELECT r FROM ReservationEntity r ORDER BY createdAt DESC")
-    Page<ReservationEntity> findAll(Pageable pageable);
+    Page<ReservationEntity> findAllEntitys(Pageable pageable);
     
 }

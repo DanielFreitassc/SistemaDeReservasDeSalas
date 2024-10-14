@@ -54,7 +54,7 @@ public class ReservationService {
     }
 
     public Page<ReservationResponseDto> getAllReservations(Pageable pageable) {
-        Page<ReservationEntity> reservations = reservationRepository.findAll(pageable);
+        Page<ReservationEntity> reservations = reservationRepository.findAllEntitys(pageable);
         return reservations.map(reservationMapper::toDto);
     }
 
