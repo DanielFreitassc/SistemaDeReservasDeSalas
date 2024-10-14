@@ -1,5 +1,6 @@
 package com.danielfreitassc.backend.models;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -40,7 +41,7 @@ public class ReservationEntity {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private ReservationEnum status;
-
+    private BigDecimal totalCost;
     @CreationTimestamp
     private Timestamp createdAt;
 }

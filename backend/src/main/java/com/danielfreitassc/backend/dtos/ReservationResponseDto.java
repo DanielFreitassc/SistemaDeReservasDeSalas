@@ -1,5 +1,6 @@
 package com.danielfreitassc.backend.dtos;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -13,7 +14,8 @@ public record ReservationResponseDto(
     UserEntity user,
     LocalDateTime startTime,
     LocalDateTime endTime,
-    ReservationEnum status
+    ReservationEnum status,
+    BigDecimal totalCost 
 ) {
     
 }
