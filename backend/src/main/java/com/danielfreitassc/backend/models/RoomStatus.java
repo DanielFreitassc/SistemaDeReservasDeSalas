@@ -1,13 +1,13 @@
 package com.danielfreitassc.backend.models;
 
-public enum ReservationEnum {
+public enum RoomStatus {
     DISPONIVEL("Disponível"),
     RESERVADO("Reservado"),
     CANCELADO("Cancelado");
 
     private final String status;
 
-    ReservationEnum(String status) {
+    RoomStatus(String status) {
         this.status = status;
     }
 

@@ -48,7 +48,7 @@ public class ReservationEntity {
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime endTime;
-    private ReservationEnum status;
+    private RoomStatus status;
     private BigDecimal totalCost;
     @CreationTimestamp
     private Timestamp createdAt;

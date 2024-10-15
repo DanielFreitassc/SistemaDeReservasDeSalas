@@ -18,5 +18,6 @@ public interface  ReservationMapper {
     @Mapping(target="roomEntity.id",source="roomId")
     @Mapping(target="userEntity.id",source="userId")
     @Mapping(target="totalCost",ignore=true)
+    @Mapping(target="status",ignore=true)
     ReservationEntity toEntity(ReservationRequestDto reservationRequestDto);
 }

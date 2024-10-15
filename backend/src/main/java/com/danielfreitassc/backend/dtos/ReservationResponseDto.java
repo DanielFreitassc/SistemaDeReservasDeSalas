@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.danielfreitassc.backend.models.ReservationEnum;
+import com.danielfreitassc.backend.models.RoomStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public record ReservationResponseDto(
@@ -21,7 +21,7 @@ public record ReservationResponseDto(
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     LocalDateTime endTime,
-    ReservationEnum status,
+    RoomStatus status,
     BigDecimal totalCost 
 ) {
     

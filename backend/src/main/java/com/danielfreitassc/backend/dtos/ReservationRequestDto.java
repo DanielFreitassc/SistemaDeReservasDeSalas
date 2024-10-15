@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.danielfreitassc.backend.models.ReservationEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.validation.constraints.NotNull;
@@ -21,8 +20,7 @@ public record ReservationRequestDto(
     
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-    @NotNull(message="Fim pode estar nulo") LocalDateTime endTime,
-    @NotNull(message="Status pode estar nulo") ReservationEnum status
+    @NotNull(message="Fim pode estar nulo") LocalDateTime endTime
 ) {
     
 }

@@ -32,7 +32,7 @@ public class RoomEntity {
     private String location;
     private int capacity;
     private BigDecimal price;
-    
+    private RoomStatus status;
     @CreationTimestamp
     @Column(updatable = false)
     private Timestamp createdAt;
