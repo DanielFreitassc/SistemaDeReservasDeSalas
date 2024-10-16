@@ -384,3 +384,220 @@ O token JWT retornado deve ser utilizado nos cabeçalhos das próximas requisiç
 ```
 Authorization: Bearer {token}
 ```
+
+## Endpoints cadastro de reserva
+
+### 1. Criar uma reserva
+
+**POST /reservation/**  
+Cadastra uma nova reserva de sala.
+
+#### Request Body
+
+```json
+{
+    "roomId": "db3b8a21-3820-4862-872f-392a16c1d768",
+    "userId": "29a03082-796b-47ee-b8d5-241f33c913b7",
+    "startTime": "03/12/2007 10:15:30",
+    "endTime": "03/12/2008 10:15:30"
+}
+```
+
+#### Response (201 - Created)
+
+```json
+{
+    "id": "2a262e45-d439-496b-ad13-8101c80ab99b",
+    "room": {
+        "id": "db3b8a21-3820-4862-872f-392a16c1d768",
+        "name": "Lab01",
+        "roomNumber": "A1F3",
+        "location": "Predio 10",
+        "capacity": 40,
+        "price": 20.00,
+        "status": "RESERVADO"
+    },
+    "user": {
+        "id": "29a03082-796b-47ee-b8d5-241f33c913b7",
+        "name": "Fulano",
+        "lastName": "De tal",
+        "username": "fulanodetal"
+    },
+    "startTime": "03/12/2007 10:15:30",
+    "endTime": "03/12/2008 10:15:30",
+    "status": "RESERVADO",
+    "totalCost": 175680.00
+}
+```
+
+### 2. Listar todas as reservas (paginado)
+
+**GET /reservation?page={page}&size={size}**  
+Retorna uma lista paginada de reservas.
+
+#### Parâmetros de Query
+- `page`: Número da página (ex: `0`)
+- `size`: Tamanho da página (ex: `10`)
+
+#### Response (200 - OK)
+
+```json
+{
+    "content": [
+        {
+            "id": "2a262e45-d439-496b-ad13-8101c80ab99b",
+            "room": {
+                "id": "db3b8a21-3820-4862-872f-392a16c1d768",
+                "name": "Lab01",
+                "roomNumber": "A1F3",
+                "location": "Predio 10",
+                "capacity": 40,
+                "price": 20.00,
+                "status": "RESERVADO"
+            },
+            "user": {
+                "id": "29a03082-796b-47ee-b8d5-241f33c913b7",
+                "name": "Fulano",
+                "lastName": "De tal",
+                "username": "fulanodetal"
+            },
+            "startTime": "03/12/2007 10:15:30",
+            "endTime": "03/12/2008 10:15:30",
+            "status": "RESERVADO",
+            "totalCost": 175680.00
+        }
+    ],
+    "pageable": {
+        "pageNumber": 0,
+        "pageSize": 10,
+        "sort": {
+            "sorted": false,
+            "unsorted": true,
+            "empty": true
+        },
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+    },
+    "totalElements": 1,
+    "totalPages": 1,
+    "last": true,
+    "first": true,
+    "size": 10,
+    "number": 0,
+    "sort": {
+        "sorted": false,
+        "unsorted": true,
+        "empty": true
+    },
+    "numberOfElements": 1,
+    "empty": false
+}
+```
+
+### 3. Obter detalhes de uma reserva por ID
+
+**GET /reservation/{id}**  
+Retorna os detalhes de uma reserva específica pelo `id`.
+
+#### Response (200 - OK)
+
+```json
+{
+    "id": "2a262e45-d439-496b-ad13-8101c80ab99b",
+    "room": {
+        "id": "db3b8a21-3820-4862-872f-392a16c1d768",
+        "name": "Lab01",
+        "roomNumber": "A1F3",
+        "location": "Predio 10",
+        "capacity": 40,
+        "price": 20.00,
+        "status": "RESERVADO"
+    },
+    "user": {
+        "id": "29a03082-796b-47ee-b8d5-241f33c913b7",
+        "name": "Fulano",
+        "lastName": "De tal",
+        "username": "fulanodetal"
+    },
+    "startTime": "03/12/2007 10:15:30",
+    "endTime": "03/12/2008 10:15:30",
+    "status": "RESERVADO",
+    "totalCost": 175680.00
+}
+```
+
+### 4. Atualizar uma reserva
+
+**PUT /reservation/{id}**  
+Atualiza os dados de uma reserva específica pelo `id`.
+
+#### Request Body
+
+```json
+{
+    "roomId": "db3b8a21-3820-4862-872f-392a16c1d768",
+    "userId": "29a03082-796b-47ee-b8d5-241f33c913b7",
+    "startTime": "03/12/2007 10:15:30",
+    "endTime": "03/12/2008 10:15:30"
+}
+```
+
+#### Response (200 - OK)
+
+```json
+{
+    "id": "2a262e45-d439-496b-ad13-8101c80ab99b",
+    "room": {
+        "id": "db3b8a21-3820-4862-872f-392a16c1d768",
+        "name": "Lab01",
+        "roomNumber": "A1F3",
+        "location": "Predio 10",
+        "capacity": 40,
+        "price": 20.00,
+        "status": "RESERVADO"
+    },
+    "user": {
+        "id": "29a03082-796b-47ee-b8d5-241f33c913b7",
+        "name": "Fulano",
+        "lastName": "De tal",
+        "username": "fulanodetal"
+    },
+    "startTime": "03/12/2007 10:15:30",
+    "endTime": "03/12/2008 10:15:30",
+    "status": "RESERVADO",
+    "totalCost": 175680.00
+}
+```
+
+### 5. Deletar uma reserva
+
+**DELETE /reservation/{id}**  
+Remove uma reserva específica pelo `id`.
+
+#### Response (200 - OK)
+
+```json
+{
+    "id": "2a262e45-d439-496b-ad13-8101c80ab99b",
+    "room": {
+        "id": "db3b8a21-3820-4862-872f-392a16c1d768",
+        "name": "Lab01",
+        "roomNumber": "A1F3",
+        "location": "Predio 10",
+        "capacity": 40,
+        "price": 20.00,
+        "status": "RESERVADO"
+    },
+    "user": {
+        "id": "29a03082-796b-47ee-b8d5-241f33c913b7",
+        "name": "Fulano",
+        "lastName": "De tal",
+        "username": "fulanodetal"
+    },
+    "startTime": "03/12/2007 10:15:30",
+    "endTime": "03/12/2008 10:15:30",
+    "status": "RESERVADO",
+    "totalCost": 175680.00
+}
+```
