@@ -44,7 +44,7 @@ O **Sistema de Reserva de Salas** é uma API simples e eficiente para gerenciar 
 
 ![image](https://github.com/user-attachments/assets/0c08e065-aea8-4051-b8bc-92d1d2e3579f)
 
-## Endpoints
+## Endpoints cadastro de salas
 
 ### 1. Criar uma sala
 
