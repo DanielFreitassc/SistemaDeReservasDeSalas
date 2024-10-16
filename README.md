@@ -42,7 +42,8 @@ O **Sistema de Reserva de Salas** é uma API simples e eficiente para gerenciar 
 
 # Modelagem do banco de dados
 
-![image](https://github.com/user-attachments/assets/0c08e065-aea8-4051-b8bc-92d1d2e3579f)
+![Modelagem do banco de dados](https://github.com/user-attachments/assets/41e7632e-f4bd-4823-8457-442be54dbc1d)
+
 
 ---
 
