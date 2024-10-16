@@ -355,3 +355,32 @@ Remove um usuário específico pelo `id`.
     "username": "fulanodetal"
 }
 ```
+## Endpoint paralogin
+
+### 1. Realizar login
+
+**POST /auth/login**  
+Autentica um usuário com base no `username` e `password` fornecidos.
+
+#### Request Body
+
+```json
+{
+    "username": "admin",
+    "password": "admin"
+}
+```
+
+#### Response (200 - OK)
+
+```json
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3....."
+}
+```
+
+O token JWT retornado deve ser utilizado nos cabeçalhos das próximas requisições para acessar rotas protegidas da API, no formato:
+
+```
+Authorization: Bearer {token}
+```
