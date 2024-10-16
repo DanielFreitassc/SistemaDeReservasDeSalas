@@ -209,3 +209,149 @@ Remove uma sala específica pelo `id`.
     "status": "DISPONIVEL"
 }
 ```
+
+## Endpoints cadastro de usuário
+
+### 1. Criar um usuário
+
+**POST /user/**  
+Cadastra um novo usuário no sistema.
+
+#### Request Body
+
+```json
+{
+    "name": "Fulano",
+    "lastName": "De tal",
+    "username": "fulanodetal",
+    "password": "Senha12345",
+    "role": "CUSTOMER"
+}
+```
+
+#### Response (201 - Created)
+
+```json
+{
+    "id": "29a03082-796b-47ee-b8d5-241f33c913b7",
+    "name": "Fulano",
+    "lastName": "De tal",
+    "username": "fulanodetal"
+}
+```
+
+### 2. Listar todos os usuários (paginado)
+
+**GET /user?page={page}&size={size}&search={search}**  
+Retorna uma lista paginada de usuários, com suporte a busca por nome ou username.
+
+#### Parâmetros de Query
+- `page`: Número da página (ex: `0`)
+- `size`: Tamanho da página (ex: `10`)
+- `search`: Filtro opcional para buscar usuários pelo nome ou username (ex: `fulanodetal`)
+
+#### Response (200 - OK)
+
+```json
+{
+    "content": [
+        {
+            "id": "29a03082-796b-47ee-b8d5-241f33c913b7",
+            "name": "Fulano",
+            "lastName": "De tal",
+            "username": "fulanodetal"
+        },
+        {
+            "id": "dc5af7d0-38af-458f-9850-d82a330c4a8d",
+            "name": "admin",
+            "lastName": "admin",
+            "username": "admin"
+        }
+    ],
+    "pageable": {
+        "pageNumber": 0,
+        "pageSize": 10,
+        "sort": {
+            "sorted": false,
+            "unsorted": true,
+            "empty": true
+        },
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+    },
+    "totalElements": 2,
+    "totalPages": 1,
+    "last": true,
+    "first": true,
+    "size": 10,
+    "number": 0,
+    "sort": {
+        "sorted": false,
+        "unsorted": true,
+        "empty": true
+    },
+    "numberOfElements": 2,
+    "empty": false
+}
+```
+
+### 3. Obter detalhes de um usuário por ID
+
+**GET /user/{id}**  
+Retorna os detalhes de um usuário específico pelo `id`.
+
+#### Response (200 - OK)
+
+```json
+{
+    "id": "29a03082-796b-47ee-b8d5-241f33c913b7",
+    "name": "Fulano",
+    "lastName": "De tal",
+    "username": "fulanodetal"
+}
+```
+
+### 4. Atualizar um usuário
+
+**PUT /user/{id}**  
+Atualiza os dados de um usuário específico pelo `id`.
+
+#### Request Body
+
+```json
+{
+    "name": "Fulano",
+    "lastName": "De tal",
+    "username": "fulanodetal",
+    "password": "NovaSenha123",
+    "role": "CUSTOMER"
+}
+```
+
+#### Response (200 - OK)
+
+```json
+{
+    "id": "29a03082-796b-47ee-b8d5-241f33c913b7",
+    "name": "Fulano",
+    "lastName": "De tal",
+    "username": "fulanodetal"
+}
+```
+
+### 5. Deletar um usuário
+
+**DELETE /user/{id}**  
+Remove um usuário específico pelo `id`.
+
+#### Response (200 - OK)
+
+```json
+{
+    "id": "29a03082-796b-47ee-b8d5-241f33c913b7",
+    "name": "Fulano",
+    "lastName": "De tal",
+    "username": "fulanodetal"
+}
+```
