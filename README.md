@@ -44,6 +44,104 @@ O **Sistema de Reserva de Salas** é uma API simples e eficiente para gerenciar 
 
 ![image](https://github.com/user-attachments/assets/0c08e065-aea8-4051-b8bc-92d1d2e3579f)
 
+---
+
+# Documentação para Executar o Banco de Dados e a API com Docker
+
+## Pré-requisitos
+
+Certifique-se de que você tem o Docker e o Docker Compose instalados em sua máquina. Se não estiverem instalados, você pode seguir as instruções de instalação:
+
+- [Instalar Docker](https://docs.docker.com/get-docker/)
+- [Instalar Docker Compose](https://docs.docker.com/compose/install/)
+
+---
+
+## 1. Subindo o Banco de Dados
+
+O primeiro passo é subir o banco de dados usando o **Docker Compose**. Certifique-se de que você possui um arquivo `docker-compose.yml` configurado corretamente para o banco de dados.
+
+### Passos:
+
+1. Navegue até o diretório onde seu arquivo `docker-compose.yml` está localizado.
+   
+2. Execute o seguinte comando para subir o banco de dados em segundo plano:
+
+   ```bash
+   docker-compose up -d
+   ```
+
+   O `-d` significa "detached", que permite rodar o serviço em segundo plano.
+
+3. Verifique se o banco de dados está rodando corretamente com o comando:
+
+   ```bash
+   docker ps
+   ```
+
+   Esse comando exibirá todos os contêineres ativos. O banco de dados deve estar listado aqui.
+
+---
+
+## 2. Build da Imagem da API
+
+Agora, você deve buildar a imagem Docker da API. Certifique-se de que você tem um `Dockerfile` configurado corretamente no diretório raiz do seu projeto.
+
+### Passos:
+
+1. Navegue até o diretório onde o arquivo `Dockerfile` da sua API está localizado.
+
+2. Execute o seguinte comando para construir a imagem Docker:
+
+   ```bash
+   docker build -t api .
+   ```
+
+   O `-t api` define o nome da imagem como `api`, e o `.` especifica que o contexto do build é o diretório atual.
+
+---
+
+## 3. Rodando a API
+
+Após o build da imagem, você pode rodar o contêiner da API usando o Docker. Certifique-se de que o banco de dados já está rodando antes de subir a API.
+
+### Passos:
+
+1. Execute o seguinte comando para rodar a API:
+
+   ```bash
+   docker run -dti -p 8080:8080 api
+   ```
+
+   Aqui:
+   - `-dti` significa que o contêiner será rodado em modo **detached** (`-d`), com terminal interativo (`-ti`).
+   - `-p 8080:8080` mapeia a porta `8080` do contêiner para a porta `8080` da sua máquina local.
+   - `api` é o nome da imagem que você buildou no passo anterior.
+
+2. Verifique se o contêiner da API está rodando com o comando:
+
+   ```bash
+   docker ps
+   ```
+
+   O contêiner da API deve estar listado aqui, com a porta `8080` mapeada.
+
+---
+
+## 4. Acessando a API
+
+Com a API rodando, você pode acessá-la via navegador ou uma ferramenta de requisições como o **Postman**. O endpoint da API estará disponível em:
+
+```
+http://localhost:8080
+```
+
+---
+
+Pronto! Agora você tem sua API e banco de dados rodando via Docker.
+
+## [Link Swagger para teste da api](http://localhost:8080/swagger-ui/index.html#/)
+
 ## Endpoints cadastro de salas
 
 ### 1. Criar uma sala
