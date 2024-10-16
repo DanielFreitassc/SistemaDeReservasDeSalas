@@ -44,4 +44,168 @@ O **Sistema de Reserva de Salas** é uma API simples e eficiente para gerenciar 
 
 ![image](https://github.com/user-attachments/assets/0c08e065-aea8-4051-b8bc-92d1d2e3579f)
 
+## Endpoints
 
+### 1. Criar uma sala
+
+**POST /room/**  
+Cria uma nova sala no sistema.
+
+#### Request Body
+
+```json
+{
+    "name": "Lab01",
+    "roomNumber": "A1F3",
+    "location": "Predio 10",
+    "capacity": 40,
+    "price": 20,
+    "status": "DISPONIVEL"
+}
+```
+
+#### Response (201 - Created)
+
+```json
+{
+    "id": "db3b8a21-3820-4862-872f-392a16c1d768",
+    "name": "Lab01",
+    "roomNumber": "A1F3",
+    "location": "Predio 10",
+    "capacity": 40,
+    "price": 20,
+    "status": "DISPONIVEL"
+}
+```
+
+### 2. Listar todas as salas (paginado)
+
+**GET /room?page={page}&size={size}&search={search}**  
+Retorna uma lista paginada de todas as salas, com suporte a busca pelo nome.
+
+#### Parâmetros de Query
+- `page`: Número da página (ex: `0`)
+- `size`: Tamanho da página (ex: `10`)
+- `search`: Filtro opcional para buscar salas pelo nome (ex: `lab01`)
+
+#### Response (200 - OK)
+
+```json
+{
+    "content": [
+        {
+            "id": "db3b8a21-3820-4862-872f-392a16c1d768",
+            "name": "Lab01",
+            "roomNumber": "A1F3",
+            "location": "Predio 10",
+            "capacity": 40,
+            "price": 20.00,
+            "status": "DISPONIVEL"
+        },
+        {
+            "id": "00f85a49-7ea9-4da3-9ace-434db7c27126",
+            "name": "Lab01",
+            "roomNumber": "A1F3",
+            "location": "Predio 10",
+            "capacity": 40,
+            "price": 20.00,
+            "status": "DISPONIVEL"
+        }
+    ],
+    "pageable": {
+        "pageNumber": 0,
+        "pageSize": 10,
+        "sort": {
+            "sorted": false,
+            "unsorted": true,
+            "empty": true
+        },
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+    },
+    "totalElements": 2,
+    "totalPages": 1,
+    "last": true,
+    "first": true,
+    "size": 10,
+    "number": 0,
+    "sort": {
+        "sorted": false,
+        "unsorted": true,
+        "empty": true
+    },
+    "numberOfElements": 2,
+    "empty": false
+}
+```
+
+### 3. Obter detalhes de uma sala por ID
+
+**GET /room/{id}**  
+Retorna os detalhes de uma sala específica pelo `id`.
+
+#### Response (200 - OK)
+
+```json
+{
+    "id": "db3b8a21-3820-4862-872f-392a16c1d768",
+    "name": "Lab01",
+    "roomNumber": "A1F3",
+    "location": "Predio 10",
+    "capacity": 40,
+    "price": 20,
+    "status": "DISPONIVEL"
+}
+```
+
+### 4. Atualizar uma sala
+
+**PUT /room/{id}**  
+Atualiza os dados de uma sala específica pelo `id`.
+
+#### Request Body
+
+```json
+{
+    "name": "Lab01",
+    "roomNumber": "A1F3",
+    "location": "Predio 10",
+    "capacity": 40,
+    "price": 20,
+    "status": "DISPONIVEL"
+}
+```
+
+#### Response (200 - OK)
+
+```json
+{
+    "id": "db3b8a21-3820-4862-872f-392a16c1d768",
+    "name": "Lab01",
+    "roomNumber": "A1F3",
+    "location": "Predio 10",
+    "capacity": 40,
+    "price": 20,
+    "status": "DISPONIVEL"
+}
+```
+
+### 5. Deletar uma sala
+
+**DELETE /room/{id}**  
+Remove uma sala específica pelo `id`.
+
+#### Response (200 - OK)
+
+```json
+{
+    "id": "db3b8a21-3820-4862-872f-392a16c1d768",
+    "name": "Lab01",
+    "roomNumber": "A1F3",
+    "location": "Predio 10",
+    "capacity": 40,
+    "price": 20,
+    "status": "DISPONIVEL"
+}
+```
