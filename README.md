@@ -11,7 +11,7 @@ O **Sistema de Reserva de Salas** é uma API simples e eficiente para gerenciar 
    Salas podem ser cadastradas com informações como nome, capacidade, disponibilidade, e preço por hora. Isso permite que os administradores configurem as opções de reserva.
 
 3. **Realização de Reservas** 📅  
-   Os usuários autenticados podem reservar salas disponíveis em um determinado período. O sistema verifica a disponibilidade e confirma a reserva.
+   Os usuários autenticados podem reservar salas disponíveis.
 
 4. **Cálculo do Valor da Reserva** 💰  
    Com base no tempo de uso da sala (duração da reserva) e o preço por hora definido, o sistema calcula automaticamente o valor total que o usuário precisa pagar pela reserva.
