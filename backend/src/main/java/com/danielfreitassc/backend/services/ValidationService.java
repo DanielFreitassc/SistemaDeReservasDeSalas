@@ -22,7 +22,7 @@ public class ValidationService {
         if(authentication != null && authentication.isAuthenticated()) {
             if(request.isUserInRole("ADMIN")) {
                 return ResponseEntity.status(HttpStatus.OK).body(new ValidationResponseDTO("Autorizado","ADMIN"));
-            } else if(request.isUserInRole("PROFESSOR")) {
+            } else if(request.isUserInRole("CUSTOMER ")) {
                 return ResponseEntity.status(HttpStatus.OK).body(new ValidationResponseDTO("Autorizado","CUSTOMER"));
             }
         }
