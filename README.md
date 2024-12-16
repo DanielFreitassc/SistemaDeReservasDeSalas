@@ -313,7 +313,7 @@ Remove uma sala específica pelo `id`.
 
 ### 1. Criar um usuário
 
-**POST /user/**  
+**POST /user**  
 Cadastra um novo usuário no sistema.
 
 #### Request Body
