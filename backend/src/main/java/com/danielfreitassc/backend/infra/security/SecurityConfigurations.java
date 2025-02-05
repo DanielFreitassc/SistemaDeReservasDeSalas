@@ -48,7 +48,7 @@ public class SecurityConfigurations {
                 .requestMatchers(HttpMethod.DELETE,"/reservation/{id}").hasAnyRole("ADMIN","CUSTOMER")
                 
                 .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                .requestMatchers(HttpMethod.GET,"/validation").hasAnyRole("ADMIN","CUSTOMER")
+                .requestMatchers(HttpMethod.GET,"/validation").permitAll()
 
                 //Permite o swagger
                 .requestMatchers(HttpMethod.GET,"/v3/api-docs/swagger-config").permitAll()

@@ -130,19 +130,32 @@ public class ReservationService {
     
 
     public ReservationResponseDto delete(UUID id) {
-        Optional<ReservationEntity> reservation = reservationRepository.findById(id);
-        if(reservation.isEmpty()) throw  new ResponseStatusException(HttpStatus.NOT_FOUND,"Nenhuma reserva encontrada");
+       ReservationEntity reservation = checkIdReservation(id);
 
-        Optional<UserEntity> user = userRepository.findById(reservation.get().getUserEntity().getId());
-        if(user.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Usuário não encontrado");
+        checkIdUser(reservation.getUserEntity().getId());
 
-        Optional<RoomEntity> room = roomRepository.findById(reservation.get().getRoomEntity().getId());
-        if(room.isEmpty()) throw  new ResponseStatusException(HttpStatus.NOT_FOUND,"Quarto não encontrado");
+        RoomEntity room = checkIdRom(reservation.getRoomEntity().getId());
         
-        RoomEntity roomEntity = room.get();
+        RoomEntity roomEntity = room;
         roomEntity.setStatus(RoomStatus.DISPONIVEL);
         roomRepository.save(roomEntity);
-        reservationRepository.delete(reservation.get());
-        return  reservationMapper.toDto(reservation.get());
+        reservationRepository.delete(reservation);
+        return  reservationMapper.toDto(reservation);
+    }
+
+    public ReservationEntity checkIdReservation(UUID id) {
+        ReservationEntity reservation = checkIdReservation(id);
+        return reservation;
+    }
+
+    public UserEntity checkIdUser(UUID id) {
+       UserEntity user = checkIdUser(id);
+        return user;
+    }
+
+    public RoomEntity checkIdRom(UUID id) {
+        Optional<RoomEntity> room = roomRepository.findById(id);
+        if(room.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Quarto não encontrado");
+        return room.get();
     }
 }
