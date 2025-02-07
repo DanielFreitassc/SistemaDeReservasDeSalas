@@ -34,13 +34,12 @@ public class ReservationService {
     private final UserRepository userRepository;
 
     public ReservationResponseDto create(ReservationRequestDto reservationRequestDto) {
-        Optional<RoomEntity> room = roomRepository.findById(reservationRequestDto.roomId());
-        if(room.isEmpty()) throw  new ResponseStatusException(HttpStatus.NOT_FOUND,"Quarto não encontrado");
+        RoomEntity room = checkIdRoom(reservationRequestDto.roomId());
 
-        Optional<UserEntity> user = userRepository.findById(reservationRequestDto.userId());
-        if(user.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Usuário não encontrado");
+        checkIdUser(reservationRequestDto.userId());
 
-        if(room.get().getStatus() == RoomStatus.RESERVADO) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quarto já reservado");
+        if(room.getStatus() == RoomStatus.RESERVADO) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quarto já reservado");
+
         if (reservationRequestDto.endTime().isBefore(reservationRequestDto.startTime())) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "End time deve ser posterior ao start time");
 
         long durationInMinutes = Duration.between(reservationRequestDto.startTime(), reservationRequestDto.endTime()).toMinutes();
@@ -49,7 +48,7 @@ public class ReservationService {
 
         BigDecimal durationInHours = BigDecimal.valueOf(durationInMinutes).divide(BigDecimal.valueOf(60), 2, RoundingMode.HALF_UP);
         
-        BigDecimal roomPrice = room.get().getPrice();
+        BigDecimal roomPrice = room.getPrice();
         if (roomPrice == null || roomPrice.compareTo(BigDecimal.ZERO) == 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Preço do quarto inválido");
         }
@@ -58,7 +57,7 @@ public class ReservationService {
 
         ReservationEntity reservation = reservationMapper.toEntity(reservationRequestDto);
         reservation.setTotalCost(totalCost);
-        RoomEntity roomEntity = room.get();
+        RoomEntity roomEntity = room;
         roomEntity.setStatus(RoomStatus.RESERVADO);
         roomRepository.save(roomEntity);
         reservation.setStatus(RoomStatus.RESERVADO);
@@ -84,7 +83,7 @@ public class ReservationService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "End time deve ser posterior ao start time");
         }
     
-        RoomEntity newRoom = checkIdRom(reservationRequestDto.roomId());
+        RoomEntity newRoom = checkIdRoom(reservationRequestDto.roomId());
         checkIdUser(reservation.getUserEntity().getId());
 
         RoomEntity currentRoom = reservation.getRoomEntity();
@@ -130,7 +129,7 @@ public class ReservationService {
 
         checkIdUser(reservation.getUserEntity().getId());
 
-        RoomEntity room = checkIdRom(reservation.getRoomEntity().getId());
+        RoomEntity room = checkIdRoom(reservation.getRoomEntity().getId());
         
         RoomEntity roomEntity = room;
         roomEntity.setStatus(RoomStatus.DISPONIVEL);
@@ -140,18 +139,20 @@ public class ReservationService {
     }
 
     public ReservationEntity checkIdReservation(UUID id) {
-        ReservationEntity reservation = checkIdReservation(id);
-        return reservation;
+        Optional<ReservationEntity> reservation = reservationRepository.findById(id);
+        if(reservation.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Nenhum reserva encontrada");
+        return reservation.get();
     }
 
-    public UserEntity checkIdUser(UUID id) {
-       UserEntity user = checkIdUser(id);
-        return user;
-    }
-
-    public RoomEntity checkIdRom(UUID id) {
+    public RoomEntity checkIdRoom(UUID id) {
         Optional<RoomEntity> room = roomRepository.findById(id);
         if(room.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Quarto não encontrado");
         return room.get();
+    }
+
+    public UserEntity checkIdUser(UUID id) {
+        Optional<UserEntity> user = userRepository.findById(id);
+        if(user.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Usuário não encontrado");
+        return user.get();
     }
 }
