@@ -78,25 +78,21 @@ public class ReservationService {
     }
 
     public ReservationResponseDto update(UUID id, ReservationRequestDto reservationRequestDto) {
-        Optional<ReservationEntity> reservation = reservationRepository.findById(id);
-        if (reservation.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhuma reserva encontrada");
+        ReservationEntity reservation = checkIdReservation(id);
     
         if (reservationRequestDto.endTime().isBefore(reservationRequestDto.startTime())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "End time deve ser posterior ao start time");
         }
     
-        Optional<RoomEntity> newRoom = roomRepository.findById(reservationRequestDto.roomId());
-        if (newRoom.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Quarto não encontrado");
-        
-        Optional<UserEntity> user = userRepository.findById(reservation.get().getUserEntity().getId());
-        if(user.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Usuário não encontrado");
+        RoomEntity newRoom = checkIdRom(reservationRequestDto.roomId());
+        checkIdUser(reservation.getUserEntity().getId());
 
-        RoomEntity currentRoom = reservation.get().getRoomEntity();
+        RoomEntity currentRoom = reservation.getRoomEntity();
     
         if (!currentRoom.getId().equals(reservationRequestDto.roomId())) {
             currentRoom.setStatus(RoomStatus.DISPONIVEL);
             roomRepository.save(currentRoom);
-            RoomEntity newRoomEntity = newRoom.get();
+            RoomEntity newRoomEntity = newRoom;
     
             if (newRoomEntity.getStatus() == RoomStatus.RESERVADO) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O quarto já está reservado");
@@ -113,7 +109,7 @@ public class ReservationService {
     
         BigDecimal durationInHours = BigDecimal.valueOf(durationInMinutes).divide(BigDecimal.valueOf(60), 2, RoundingMode.HALF_UP);
     
-        BigDecimal roomPrice = newRoom.get().getPrice();
+        BigDecimal roomPrice = newRoom.getPrice();
         if (roomPrice == null || roomPrice.compareTo(BigDecimal.ZERO) == 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Preço do quarto inválido");
         }

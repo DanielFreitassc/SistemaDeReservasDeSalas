@@ -29,10 +29,10 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
 
                 .requestMatchers(HttpMethod.POST,"/user").permitAll()
-                .requestMatchers(HttpMethod.GET,"/user").permitAll()
-                .requestMatchers(HttpMethod.GET,"/user/{id}").permitAll()
-                .requestMatchers(HttpMethod.PATCH,"/user/{id}").permitAll()
-                .requestMatchers(HttpMethod.DELETE,"/user/{id}").permitAll()
+                .requestMatchers(HttpMethod.GET,"/user").hasAnyRole("ADMIN","CUSTOMER")
+                .requestMatchers(HttpMethod.GET,"/user/{id}").hasAnyRole("ADMIN","CUSTOMER")
+                .requestMatchers(HttpMethod.PATCH,"/user/{id}").hasAnyRole("ADMIN","CUSTOMER")
+                .requestMatchers(HttpMethod.DELETE,"/user/{id}").hasAnyRole("ADMIN","CUSTOMER")
                 
                 
                 .requestMatchers(HttpMethod.POST,"/room").hasRole("ADMIN")
