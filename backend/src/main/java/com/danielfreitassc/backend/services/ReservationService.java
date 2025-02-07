@@ -140,7 +140,7 @@ public class ReservationService {
 
     public ReservationEntity checkIdReservation(UUID id) {
         Optional<ReservationEntity> reservation = reservationRepository.findById(id);
-        if(reservation.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Nenhum reserva encontrada");
+        if(reservation.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Reserva não encontrada");
         return reservation.get();
     }
 
