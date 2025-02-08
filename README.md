@@ -147,7 +147,7 @@ Pronto! Agora você tem sua API e banco de dados rodando via Docker.
 
 ### 1. Criar uma sala
 
-**POST /room/**  
+**POST /room**  
 Cria uma nova sala no sistema.
 
 #### Request Body
@@ -488,7 +488,7 @@ Authorization: Bearer {token}
 
 ### 1. Criar uma reserva
 
-**POST /reservation/**  
+**POST /reservation**  
 Cadastra uma nova reserva de sala.
 
 #### Request Body
