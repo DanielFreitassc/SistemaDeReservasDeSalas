@@ -699,5 +699,5 @@ Remove uma reserva específica pelo `id`.
     "status": "RESERVADO",
     "totalCost": 175680.00
 }
-```
+``
 
