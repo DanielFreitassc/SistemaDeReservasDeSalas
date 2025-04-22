@@ -700,4 +700,3 @@ Remove uma reserva específica pelo `id`.
     "totalCost": 175680.00
 }
 ```
-
